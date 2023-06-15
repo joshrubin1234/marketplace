@@ -1,0 +1,79 @@
+{% extends 'core/base.html'%}
+
+{% block title %}{{ item.name }}{% endblock %}
+
+
+{% block content %}
+<div class = "grid grid-cols-2 gap-0 mx-auto">
+    <div class = "mx-auto">
+        <img src="{{item.image.url}}" class = "item-image rounded-xl">
+    </div>
+
+    <div class = "grey-box mx-auto p-6 bg-gray-100 rounded-xl">
+        <h1 class = "mb-6 text-3xl">{{item.name }}</h1>
+        <p class="text-gray-500"><strong>Price: </strong>{{item.price}}</p> 
+        <p class="text-gray-500"><strong>Seller: </strong>{{item.created_by.username}}</p> 
+        {% if item.description%}
+            <p class="text-gray-700">
+                <strong class="text-gray-500">Description:</strong><br>
+                {{item.description}}
+            </p>
+        {% endif %}
+
+        <a href="#" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Contact Seller </a>
+    </div>
+</div>
+<style>
+    .grey-box {
+        width: 400px;
+        height: 480px;
+    }
+    .item-image {
+        width: 400px;
+        height: 480px;
+        margin-right: auto;
+    }
+</style>
+
+<div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+    <h2 class="mb-12 text-2xl text-center">Related Items</h2>
+
+    <div class="grid grid-cols-5 gap-2">
+        {% for item in related_items %}
+            <div>
+                <a href="{% url 'item:detail' item.id %}">
+                    <div class="image-wrapper">
+                        <img src = "{{item.image.url}}" class="item-image-r rounded-t-xl">
+                    </div>
+                    <div class="white-box p-6 bg-white rounded-b-xl">
+                        <h2 class="text-2xl">{{item.name}}</h2>
+                        <p class="text-gray-500">Price: {{item.price}}</p>
+                    </div>
+                </a>
+            </div>
+
+        {% endfor %}
+    </div>
+</div> 
+<style>
+    .item-image-r {
+        width: 200px;
+        height: 240px;
+        margin-right: auto;
+    }
+    .white-box {
+        width: 200px;
+        height: 120px;
+    }
+    .image-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+
+
+
+
+{% endblock %}

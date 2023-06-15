@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="uft-8">
+        <meta name="viewport" content="width=device-width, inital-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"> </script>
+
+        <title>{% block title %} {% endblock %} | Sell Your Stuff</title>
+    </head>
+
+    <body>
+
+        <nav class = "py-6 px-6 flex justify-between items-center border-b border-gray-200">
+            <a href="/" class="text-xl font-semibold"> Sell Your Stuff </a>
+            <div class="space-x-6">
+                <a href="{% url 'item:new' %}" class="text-lg font-semibold hover:text-gray-500">New item</a>
+                <a href="{% url 'item:items' %}" class="text-lg font-semibold hover:text-gray-500">Browse</a>
+
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'conversation:inbox' %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Inbox</a>
+                    <a href="{% url 'dashboard:index' %}" class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Dashboard</a>
+                {% else %}
+                    <a href="{% url 'core:signup' %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Sign up</a>
+                    <a href="{% url 'core:login' %}" class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Log in</a>
+                {% endif %}
+            </div>
+        </nav>
+
+        <div class = "px-6 py-6">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <footer class ="py-6 px-6 flex justify-between bg-gray-800">
+            <div class="w-2/3 pr-10">
+                <h3 class="mb-5 font-semibold text-gray-400">About</h3>
+                <p class = "text-lg text-gray-500">Sell Your Stuff is an intuitive and vibrant online marketplace designed and developed by Joshua Rubin, an innovative Computer Science student from Florida International University. It provides a reliable platform where users can buy and sell a wide array of items, connecting people in a community-centric, e-commerce environment. Joshua, leveraging his understanding of Django, a high-level Python web framework, has built a streamlined, user-friendly interface that is easy to navigate, catering to both tech-savvy individuals and those less familiar with online platforms.<br><br>
+
+                    Sell Your Stuff is an outstanding example of a modern, secure and versatile digital marketplace, offering various features that enhance its utility and appeal. Upon entering the website, users can sign in using their credentials. The platform fosters a sense of community by allowing users to interact with each other, encouraging communication and negotiation in a friendly atmosphere.<br><br>
+
+                    The website displays products categorically, making the process of buying and selling incredibly straightforward. Sellers can quickly list their products, with options to add multiple images and detailed descriptions. The built-in search functionality allows buyers to find items of interest with ease, and the filter options help in refining results based on factors like price, category, or location.<br><br>
+
+                    On the security front, Joshua has implemented robust security measures to ensure users' data protection, privacy, and transactional security. The website uses secure payment gateways for smooth and safe financial transactions. Additionally, it has a dedicated customer service team ready to assist users in case they encounter any problems or have queries.<br><br>
+
+                    Overall, Sell Your Stuff presents an excellent example of what a passionate and skilled Computer Science student can achieve. It is a highly functional and beautifully designed marketplace that makes buying and selling goods online an enjoyable and secure process. Joshua Rubin's project clearly demonstrates his software development skills and a deep understanding of Django, contributing to the growing field of e-commerce.<br><br>
+
+                 </p>
+            </div>
+
+            <div class="w-2/3 pr-10">
+                <h3 class = "mb-5 font-semibold text-gray-400">Menu</h3>
+                <ul class = "space-y-2">
+                    <li><a href = "#" class="text-lg text-teal-500 hover:text-teal-700">About</a></li>
+                    <li><a href = "{% url 'core:contact' %}" class="text-lg text-teal-500 hover:text-teal-700">Contact</a></li>
+                    <li><a href = "#" class="text-lg text-teal-500 hover:text-teal-700">Privacy Policy</a></li>
+                    <li><a href = "#" class="text-lg text-teal-500 hover:text-teal-700">Terms of use</a></li>
+                </ul>
+            </div>
+        </footer>
+    </body>
+
+</html>
